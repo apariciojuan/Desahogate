@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Web Desahogate Recording{% endblock %}
+
+{% block content %}
+<div class="container mb-3">
+  <form method="post" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-warning" type="submit">Enviar</button>
+  </form>
+</div>
+{% endblock %}
