@@ -2,5 +2,5 @@
 __pycache__/
 webDe/LocalSetting.py
 db.sqlite3
-media/profile/*
+media/profiles/*
 media/recording/*
