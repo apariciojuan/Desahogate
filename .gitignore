@@ -4,3 +4,4 @@ webDe/LocalSetting.py
 db.sqlite3
 media/profiles/*
 media/recording/*
+ssl/*

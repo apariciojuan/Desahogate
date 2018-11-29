@@ -13,10 +13,11 @@ def register(request):
     if request.method == 'POST':
         f = RegistroForm(request.POST)
         if f.is_valid():
-            f = f.save()
-            usuario = userProfile()
-            usuario.user = f
-            usuario.save()
+            f.save()
+        #creo extension in model for signals
+        #    usuario = userProfile()
+        #    usuario.user = f
+        #    usuario.save()
             messages.success(request, 'Cuenta creada, ya puedo hacer Login')
             return redirect('/accounts/registrar/')
     else:

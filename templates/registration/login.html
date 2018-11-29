@@ -32,6 +32,8 @@ Login
 			 <input type="hidden" name="next" value="{% url 'entradas:index' %}">
        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button><br>
 			 <p>Aun no tienes tu Cuenta Registrate <a href="{% url 'accounts:registrar' %}">Aqui...</a></p>
+			 <a class="btn btn-primary" href="{% url "social:begin" "facebook" %}">Ingresa con Facebook</a><br>
+			 <a class="btn btn-danger" href="{% url "social:begin" "google-oauth2" %}">Ingresa con Google</a>
        <p class="mt-5 mb-3 text-muted">&copy; {% now "Y" %}</p>
      </form>
 

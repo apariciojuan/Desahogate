@@ -32,7 +32,7 @@ class Records(models.Model):
         return reverse("entradas:record_view", kwargs={'slug': self.slug})
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-create']
 
 
 class Comments(models.Model):
@@ -46,3 +46,6 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.recordOwn.title
+
+    class Meta:
+        ordering = ['create']
