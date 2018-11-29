@@ -37,7 +37,7 @@ COPY requirements.txt /home/docker/
 RUN pip3 install -r /home/docker/requirements.txt
 
 # add (the rest of) our code, for work test package
-#COPY . /home/docker/code/
+COPY . /home/docker/code/
 
 #little color
 ENV TERM="xterm-256color"
