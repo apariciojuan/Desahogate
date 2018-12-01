@@ -163,7 +163,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-#Para estoy hay que tenerlo con https la redireccion
+#Para esto hay que tenerlo con https la redireccion
 SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_KEY
 SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
 #para traer el email
