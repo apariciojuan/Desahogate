@@ -19,7 +19,7 @@
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-7">
-                    Username: {{ object.user }}
+                    Username: {{ object.user }}, Email: {{  object.user.email }}
                 </div>
             </div><br>
             {% if request.user.id == object.user.id %}

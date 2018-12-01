@@ -166,12 +166,20 @@ AUTHENTICATION_BACKENDS = (
 #Para estoy hay que tenerlo con https la redireccion
 SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_KEY
 SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
+#para traer el email
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE_KEY
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_SECRET
 #SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
+
 #SOCIAL_AUTH_PIPELINE = (
+    #revisar para implementar que nose repitan los email
+#    'utilsSocialPipe.check_email_exists',
 #    'social_core.pipeline.social_auth.social_details',
 #    'social_core.pipeline.social_auth.social_uid',
 #    'social_core.pipeline.social_auth.auth_allowed',

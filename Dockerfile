@@ -29,15 +29,15 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 #will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies
 #when you made a change a line or two in your app.
-#RUN mkdir -p /home/docker/code
-#VOLUME /home/docker/code
+RUN mkdir -p /home/docker/code
+VOLUME /home/docker/code
 
 #for work in volume
 COPY requirements.txt /home/docker/
 RUN pip3 install -r /home/docker/requirements.txt
 
 # add (the rest of) our code, for work test package
-COPY . /home/docker/code/
+#COPY . /home/docker/code/
 
 #little color
 ENV TERM="xterm-256color"
