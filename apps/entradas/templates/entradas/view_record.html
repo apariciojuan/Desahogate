@@ -6,15 +6,26 @@
 <div class="container mb-2">
     {% if object %}
         <h1>{{ object.title|capfirst }}</h1>
-        <a href="{% url "accounts:profile" object.author.profi.id %}">
-            {% if object.author.profi.imagen %}
-              <img src="{{ object.author.profi.imagen.url }}" class="img-fluid" width="72" height="72">
-            {% else %}
-              <img src="{% static 'img/no-avatar.jpg' %}" class="img-fluid" width="72" height="72">
-            {% endif %}
-        </a>
-         User: <a href="{% url "accounts:profile" object.author.profi.id %}">{{ object.author|capfirst }}</a>,
+        {% if object.author != None %}
+            <a href="{% url "accounts:profile" object.author.profi.id %}">
+                {% if object.author.profi.imagen %}
+                  <img src="{{ object.author.profi.imagen.url }}" class="img-fluid" width="72" height="72">
+                {% else %}
+                  <img src="{% static 'img/no-avatar.jpg' %}" class="img-fluid" width="72" height="72">
+                {% endif %}
+            </a>
+             User: <a href="{% url "accounts:profile" object.author.profi.id %}">{{ object.author|capfirst }}</a>,
+         {% else %}
+            User: Anonymous.
+         {% endif %}
           Fecha: {{ object.create|date:"Y-m-d H:i" }}, Visto: {{ object.views }} veces.
+          <div> Tags:
+              {% for tag in object.tags.all %}
+                  <a href="{% url 'entradas:tags_list_view' tag.slug %}">{{ tag.name }}</a>
+              {% empty %}
+                <p>---</p>
+              {% endfor %}
+          </div>
          <div>
              <audio controls>
                <source src="{{ object.upload.url }}" type="audio/wav">

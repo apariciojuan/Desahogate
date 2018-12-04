@@ -2,8 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template import defaultfilters
 from django.urls import reverse
-# Create your models here.
 
+#tags
+from taggit.managers import TaggableManager
+
+
+# Create your models here.
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'recording/user_{0}/{1}'.format(instance.author, filename)
@@ -20,6 +24,7 @@ class Records(models.Model):
     views = models.PositiveIntegerField(default=0)
     active = models.BooleanField(default=True)
     slug = models.SlugField(max_length=60)
+    tags = TaggableManager(help_text="Separados por coma tags.")
 
     def __str__(self):
         return self.title

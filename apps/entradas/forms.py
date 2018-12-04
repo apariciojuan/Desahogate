@@ -3,18 +3,15 @@ from .models import Records, Comments
 
 from django.forms.utils import ErrorList
 
-#only valadate extension, that can be change.
-from django.core.validators import FileExtensionValidator
-
 import os
 
 class CreateRecordForm(forms.ModelForm):
     ALLOWED_TYPES = ['mp3', 'wav']
     class Meta:
         model = Records
-        fields = ['title', 'descripcion', 'upload']
+        fields = ['title', 'descripcion', 'upload', 'tags']
         labels = { 'title': 'Titulo', 'descripcion': 'Descripcion',
-                                                'upload': 'Subir Audio' }
+                            'upload': 'Subir Audio', 'tags': 'Que Dices?' }
         widgets = { 'descripcion': forms.Textarea(
                         attrs={'width':"70%", 'cols' : "50", 'rows': "4", })
                   }
@@ -32,6 +29,7 @@ class CreateRecordForm(forms.ModelForm):
                   [u"Archivo de audio no tiene formato permitido mp3 or wav."])
         else:
             return upload
+
 
 class CommentsForm(forms.ModelForm):
 
