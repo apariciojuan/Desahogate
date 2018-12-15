@@ -12,20 +12,23 @@
                     {% csrf_token %}
                     <div class="row">
                     <!-- Avatar -->
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                           {% if object.imagen %}
-                            <img src="{{ object.imagen.url }}" class="img-fluid">
+                            <img src="{{ object.imagen.url }}" class="img-fluid rounded-circle">
                             <p class="mt-1">¿Borrar? <input type="checkbox" id="imagen-clear_id" name="imagen-clear" /></p>
                           {% else %}
-                            <img src="{% static 'img/no-avatar.jpg' %}" class="img-fluid">
+                            <img src="{% static 'img/no-avatar.jpg' %}" class="img-fluid rounded-circle">
                           {% endif %}
                           <input type="file" name="imagen" class="form-control-file mt-3" id="id_imagen" accept="image/*">
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                         </div>
                         <div class="col-md-7">
-                          Username: {{ object.user }}
+                          Username:
+                          <div class="form-control w-75 mb-2">{{ object.user }}</div>
+                          Email:
+                          <div class="form-control w-75">{{ object.user.email }}</div>
                         </div>
                     </div><br>
                       <a href="{% url 'accounts:password_change' %}">Cambiar Password</a>

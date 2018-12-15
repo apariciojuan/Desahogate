@@ -24,7 +24,8 @@ class Records(models.Model):
     views = models.PositiveIntegerField(default=0)
     active = models.BooleanField(default=True)
     slug = models.SlugField(max_length=60)
-    tags = TaggableManager(help_text="Separados por coma tags.")
+    tags = TaggableManager(
+                    help_text="Ingresa tus HashTags, separados por coma.")
 
     def __str__(self):
         return self.title

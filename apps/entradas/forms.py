@@ -12,8 +12,13 @@ class CreateRecordForm(forms.ModelForm):
         fields = ['title', 'descripcion', 'upload', 'tags']
         labels = { 'title': 'Titulo', 'descripcion': 'Descripcion',
                             'upload': 'Subir Audio', 'tags': 'Que Dices?' }
-        widgets = { 'descripcion': forms.Textarea(
-                        attrs={'width':"70%", 'cols' : "50", 'rows': "4", })
+        widgets = { 'title': forms.TextInput(
+                            attrs={'class': 'form-control'}),
+                    'descripcion': forms.Textarea(
+                        attrs={'class': 'form-control', 'width':"80%",
+                                'cols' : "50", 'rows': "4", }),
+                    'tags': forms.TextInput(
+                            attrs={'class': 'form-control'})
                   }
 
     def clean_upload(self):

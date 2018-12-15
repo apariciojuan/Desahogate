@@ -4,14 +4,16 @@
 
 {% block content %}
 <div class="container mb-2">
+  <div class="row">
+    <div class="col-md-9 mx-auto">
     {% if object %}
         <h1>{{ object.title|capfirst }}</h1>
         {% if object.author != None %}
             <a href="{% url "accounts:profile" object.author.profi.id %}">
                 {% if object.author.profi.imagen %}
-                  <img src="{{ object.author.profi.imagen.url }}" class="img-fluid" width="72" height="72">
+                  <img src="{{ object.author.profi.imagen.url }}" class="img-fluid rounded-circle" width="72" height="72">
                 {% else %}
-                  <img src="{% static 'img/no-avatar.jpg' %}" class="img-fluid" width="72" height="72">
+                  <img src="{% static 'img/no-avatar.jpg' %}" class="img-fluid rounded-circle" width="72" height="72">
                 {% endif %}
             </a>
              User: <a href="{% url "accounts:profile" object.author.profi.id %}">{{ object.author|capfirst }}</a>,
@@ -52,7 +54,7 @@
                      <div>
                          {{ form.comment }}
                      </div>
-                     <button class="btn btn-primary" type="submit">Enviar</button>
+                     <button class="btn btn-primary" type="submit">Enviar Comentario</button>
                  </form>
             {% else %}
                  <a href="{% url "accounts:registrar" %}">Registrate para comentar...</a>
@@ -68,5 +70,7 @@
     {% else %}
        <h3> No existe la Entrada </h3>
     {% endif %}
+  </div>
+ </div>
 </div>
 {% endblock %}

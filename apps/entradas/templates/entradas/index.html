@@ -10,9 +10,9 @@
           {% for re in record_users %}
             <div class="media text-muted pt-3">
               {% if re.author.profi.imagen %}
-                <img src="{{ re.author.profi.imagen.url }}" alt="" class="mr-2 rounded" width="72" height="72">
+                <img src="{{ re.author.profi.imagen.url }}" alt="avatar" class="mr-2 rounded-circle" width="72" height="72">
               {% else %}
-              <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
+              <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="avatar" class="mr-2 rounded-circle">
               {% endif %}
 
               <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">

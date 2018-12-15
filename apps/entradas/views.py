@@ -23,6 +23,7 @@ class index_views(ListView):
 
 
 def tags_list(request, tag_slug=None):
+    #function list for tags
     object_list = Records.objects.all()
     tag = None
 

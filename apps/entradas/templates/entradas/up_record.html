@@ -3,11 +3,65 @@
 {% block title %}Web Desahogate Recording{% endblock %}
 
 {% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-audio-recorder@2.2.0/dist/vue-audio-recorder.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <div class="container mb-3">
-  <form method="post" action="" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button class="btn btn-warning" type="submit">Enviar</button>
-  </form>
+  <div class="row">
+    <div class="col mt-4 mb-4">
+      <h2>Puedes Subir un audio o lo puedes grabar ahora:</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 pl-4">
+      <form method="post" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-warning" type="submit">Enviar</button>
+      </form>
+    </div>
+    <div class="col-6 pl-4">
+      <div id="app">[[ ver ]]
+         <audio-recorder
+               upload-url="{% url 'entradas:up_records' %}"
+               :attempts="2"
+               :headers="headers"
+               :time="4"
+               :start-record="callback"
+               :stop-record="callback"
+               :start-upload="callback"
+               :successful-upload="callback"
+               :failed-upload="callback"/>
+
+       </div>
+
+    </div>
+  </div>
 </div>
+ <script>
+
+   Vue.prototype.$http = axios
+   Vue.use(VueAudioRecorder)
+
+   new Vue({
+     delimiters: ['[[', ']]'],
+     el: '#app',
+     data: {
+           headers: {
+             'X-Custom-Header': 'some data',
+           },
+           ver: "Grabalo Ahora Mismo",
+
+     },
+     components: {VueAudioRecorder},
+     methods: {
+       callback (msg) {
+         console.debug('Event: ', msg)
+
+       }
+     }
+   })
+
+</script>
 {% endblock %}

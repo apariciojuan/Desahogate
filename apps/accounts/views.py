@@ -5,7 +5,7 @@ from django.http import HttpResponseForbidden
 from django.views.generic import (ListView, CreateView, DeleteView,
                                     UpdateView, DetailView)
 from django.urls import reverse, reverse_lazy
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RegistroForm, EditProfileForm
 from .models import *
 
@@ -24,11 +24,11 @@ def register(request):
         f = RegistroForm()
     return render(request, 'accounts/registrar.html', {'form': f})
 
-class Profile_views(DetailView):
+class Profile_views(LoginRequiredMixin, DetailView):
     model = userProfile
     template_name = 'accounts/profile.html'
 
-class EditProfile_views(UpdateView):
+class EditProfile_views(LoginRequiredMixin, UpdateView):
     model = userProfile
     form_class = EditProfileForm
     template_name = 'accounts/editProfile.html'
