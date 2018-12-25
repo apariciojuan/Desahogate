@@ -62,7 +62,7 @@
             {% endif%}
                  <br>
             {% if request.user.is_staff %}
-                 <a class="btn btn-primary" href={% url 'entradas:record_edit_view' object.slug %}>Editar</a>
+                 <a class="btn btn-primary" href={% url 'entradas:record_edit_view' object.id object.slug %}>Editar</a>
             {% endif %}
              <a class="btn btn-primary" href={% url 'entradas:index' %}>Volver</a>
         </div>
