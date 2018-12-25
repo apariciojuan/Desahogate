@@ -35,7 +35,7 @@ class Records(models.Model):
         super(Records, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("entradas:record_view", kwargs={'slug': self.slug})
+        return reverse("entradas:record_view", kwargs={'pk': self.pk, 'slug': self.slug})
 
     class Meta:
         ordering = ['-create']
