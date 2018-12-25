@@ -105,4 +105,5 @@ class Record_edit_views(LoginRequiredMixin, UpdateView):
     # capture that 'pk' and pass it to 'reverse_lazy()' function
     #send this slug because edit the title else send slug = self.kwargs['slug']
         slug=self.object.slug
-        return reverse_lazy('entradas:record_view', kwargs={'slug': slug })
+        pk=self.object.id 
+        return reverse_lazy('entradas:record_view', kwargs={'pk': pk, 'slug': slug })
