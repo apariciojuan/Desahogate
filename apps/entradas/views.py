@@ -88,10 +88,11 @@ class Record_views(DetailView):
         self.object = self.get_object
         form = self.form_class(request.POST)
         if form.is_valid():
+            pk = kwargs['pk']  
             slug = kwargs['slug']
             comentario = form.save(commit=False)
             comentario.author = User.objects.get(username=request.user)
-            comentario.recordOwn = self.model.objects.get(slug=slug)
+            comentario.recordOwn = self.model.objects.get(pk=pk)
             comentario.save()
         return HttpResponseRedirect(comentario.recordOwn.get_absolute_url())
 
