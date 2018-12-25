@@ -2,7 +2,7 @@ from django import forms
 from .models import Records, Comments
 
 from django.forms.utils import ErrorList
-
+from taggit.forms import TagWidget
 import os
 
 class CreateRecordForm(forms.ModelForm):
@@ -17,7 +17,7 @@ class CreateRecordForm(forms.ModelForm):
                     'descripcion': forms.Textarea(
                         attrs={'class': 'form-control', 'width':"80%",
                                 'cols' : "50", 'rows': "4", }),
-                    'tags': forms.TextInput(
+                    'tags': TagWidget(
                             attrs={'class': 'form-control'})
                   }
 
