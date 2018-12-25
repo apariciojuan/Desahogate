@@ -1,67 +1,173 @@
-{% extends 'base.html' %}
+% extends 'base.html' %}
 {% load static %}
 {% block title %}Web Desahogate Recording{% endblock %}
 
 {% block content %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue-audio-recorder@2.2.0/dist/vue-audio-recorder.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<div class="container mb-3">
+ <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<div class="container-fluid">
   <div class="row">
-    <div class="col mt-4 mb-4">
-      <h2>Puedes Subir un audio o lo puedes grabar ahora:</h2>
+   <div class="col-3">
+   </div>
+     <div class="col-6 mt-4 mb-4">
+        <h2>Puedes Subir un audio o lo puedes grabar ahora:</h2>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-6 pl-4">
-      <form method="post" action="" enctype="multipart/form-data">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button class="btn btn-warning" type="submit">Enviar</button>
-      </form>
-    </div>
-    <div class="col-6 pl-4">
-      <div id="app">[[ ver ]]
-         <audio-recorder
-               upload-url="{% url 'entradas:up_records' %}"
-               :attempts="2"
-               :headers="headers"
-               :time="4"
-               :start-record="callback"
-               :stop-record="callback"
-               :start-upload="callback"
-               :successful-upload="callback"
-               :failed-upload="callback"/>
+      <div class="col-3">
+   </div>
+   <div class="col-6">
+   <ul class="nav nav-tabs" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Grabar un Audio
+         &nbsp; <img src="{% static 'img/Google_mic.svg.png' %}" width="50" height="50" alt=""/></a>
 
-       </div>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Enviar un Audio&nbsp;
+    <img src="{% static 'img/upload-1118929_1280.png' %}" width="50" height="50" alt=""/></a></a>
+	</li>
 
+</ul><!-- Tab panes -->
+<div class="tab-content">
+	<div class="tab-pane active" id="tabs-1" role="tabpanel">
+
+    <div class="col mb-5">
+    <div class="container" id="record_file">
+        <form  method="POST">
+         {% csrf_token %}
+           <div class="form-group">
+             <label for="formGroupExampleInput">Titulo</label>
+             <input type="text" class="form-control" id="title" name="title" placeholder="Titulo" required>
+              <label for="formGroupExampleInput">Descripcion</label>
+              <textarea name="descripcion" cols="50" rows="4" class="form-control" width="80%" maxlength="400" id="descripcion"></textarea>
+              <label for="formGroupExampleInput">Que dices?</label>
+              <input type="text" class="form-control" id="tags" name="tags" placeholder="Que dices?" required>
+              <input type="hidden" class="form-control" id="tags" name="secret" placeholder="Que dices?" required>
+           </div>
+         </form>
+           <button type="submit" class="btn btn-primary"  style="width:100%;" id="sendit" onclick="send();">Save it!</button>
     </div>
+    <div>
+     	<h2>Record</h2>
+     		<p>
+     			<button id="record">Start</button>
+     			<button id="stopRecord" disabled>Stop</button>
+      	 </p>
+   		<p>
+    			<audio id="recordedAudio"></audio>
+   		</p>
+     </div>
+   </div>
   </div>
-</div>
- <script>
 
-   Vue.prototype.$http = axios
-   Vue.use(VueAudioRecorder)
+	<div class="tab-pane" id="tabs-2" role="tabpanel">
+	    <div class="col mb-5" >
+         <div class="container" id="send_file" >
+            <form method="post" action="" enctype="multipart/form-data">
+              {% csrf_token %}
+               {{ form.as_p }}
 
-   new Vue({
-     delimiters: ['[[', ']]'],
-     el: '#app',
-     data: {
-           headers: {
-             'X-Custom-Header': 'some data',
-           },
-           ver: "Grabalo Ahora Mismo",
+          <button class="btn btn-warning"  style="width:100%" type="submit">Enviar</button>
+        </form>
+      </div>
 
-     },
-     components: {VueAudioRecorder},
-     methods: {
-       callback (msg) {
-         console.debug('Event: ', msg)
+   </div>
+  </div>
 
+   </div>
+  </diV>
+
+<script>
+
+  var upto = null;
+  function getVar(vari){
+     upto = vari;
+    return upto;
+  }
+
+  navigator.mediaDevices.getUserMedia({audio:true})
+      .then(stream => {handlerFunction(stream)})
+       function handlerFunction(stream) {
+            rec = new MediaRecorder(stream);
+            rec.ondataavailable = e => {
+              audioChunks.push(e.data);
+              if (rec.state == "inactive"){
+                var blob = new Blob(audioChunks,{type:'audio/mpeg-3'});
+                recordedAudio.src = URL.createObjectURL(blob);
+                recordedAudio.controls=true;
+                recordedAudio.autoplay=true;
+                var file = new File([blob], "audio");
+                console.log('bytes',file)
+                $("#dropdownMenuButton").hide();
+                this.upto = getVar(file);
+
+
+              }
+            }
+          }
+function send(){
+    if(this.upto != null){
+       console.log("data",this.upto);
+       var filename = new Date().toISOString(); //filename to send to server without extension
+       //upload link
+       var xhr=new XMLHttpRequest();
+       var csrftoken = getCookie('csrftoken');
+        xhr.onload=function(e) {
+          if(this.readyState === 4) {
+                console.log("Server returned: ",e.target.responseText);
+               window.location.href = '/';
+              }
+         }
+        var fd=new FormData();
+        fd.append("title",$('#title').val() );
+        fd.append("descripcion", $('#descripcion').val())
+        fd.append("tags", $('#tags').val())
+        fd.append("upload", this.upto, filename+".mp3");
+        xhr.open("POST", document.URL,true);
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        xhr.send(fd);
+
+         }
+      }
+
+record.onclick = e => {
+          console.log('I was clicked')
+          record.disabled = true;
+          record.style.backgroundColor = "blue"
+          stopRecord.disabled=false;
+          audioChunks = [];
+          $("#secret").attr('value','ready');
+          rec.start();
+
+
+ }
+
+stopRecord.onclick = e => {
+          console.log("I was clicked")
+          record.disabled = false;
+          stop.disabled=true;
+          record.style.backgroundColor = "red"
+          rec.stop();
+
+ }
+
+function getCookie(name) {
+   var cookieValue = null;
+   if (document.cookie && document.cookie != '') {
+       var cookies = document.cookie.split(';');
+       for (var i = 0; i < cookies.length; i++) {
+           var cookie = jQuery.trim(cookies[i]);
+           // Does this cookie string begin with the name we want?
+           if (cookie.substring(0, name.length + 1) == (name + '=')) {
+               cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+               break;
+           }
        }
-     }
-   })
+   }
+   return cookieValue;
+ }
 
 </script>
 {% endblock %}
