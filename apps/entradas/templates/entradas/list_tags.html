@@ -16,10 +16,10 @@
               {% endif %}
 
               <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <a href="{% url 'entradas:record_view' re.slug %}"><strong class="d-block text-gray-dark">{{ re.title|capfirst }}</strong></a>
+                <a href="{% url 'entradas:record_view' re.id re.slug %}"><strong class="d-block text-gray-dark">{{ re.title|capfirst }}</strong></a>
                 {{ re.descripcion }}
               </p>
-                <a href="{% url 'entradas:record_view' re.slug %}">Escuchar</a>
+                <a href="{% url 'entradas:record_view' re.id re.slug %}">Escuchar</a>
             </div>
           {% endfor %}
           <small class="d-block text-right mt-3">
