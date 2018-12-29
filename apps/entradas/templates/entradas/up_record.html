@@ -1,10 +1,9 @@
-% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block title %}Web Desahogate Recording{% endblock %}
 
 {% block content %}
  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
 <div class="container-fluid">
   <div class="row">
    <div class="col-3">
@@ -28,13 +27,15 @@
 		<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Enviar un Audio&nbsp;
     <img src="{% static 'img/upload-1118929_1280.png' %}" width="50" height="50" alt=""/></a></a>
 	</li>
+  	</li>
+ 
 
 </ul><!-- Tab panes -->
 <div class="tab-content">
 	<div class="tab-pane active" id="tabs-1" role="tabpanel">
 
     <div class="col mb-5">
-    <div class="container" id="record_file">
+     <div class="container" id="record_file">
         <form  method="POST">
          {% csrf_token %}
            <div class="form-group">
@@ -51,9 +52,13 @@
     </div>
     <div>
      	<h2>Record</h2>
+ 
+      
      		<p>
-     			<button id="record">Start</button>
+       
+     			<button id="record">Start     <p id="counter">0</p>  </button>
      			<button id="stopRecord" disabled>Stop</button>
+      
       	 </p>
    		<p>
     			<audio id="recordedAudio"></audio>
@@ -75,8 +80,10 @@
 
    </div>
   </div>
+ </div>
+   	
 
-   </div>
+  </div>
   </diV>
 
 <script>
@@ -139,7 +146,10 @@ record.onclick = e => {
           stopRecord.disabled=false;
           audioChunks = [];
           $("#secret").attr('value','ready');
+          cont();
           rec.start();
+     
+       
 
 
  }
@@ -150,6 +160,7 @@ stopRecord.onclick = e => {
           stop.disabled=true;
           record.style.backgroundColor = "red"
           rec.stop();
+          stopCount();
 
  }
 
@@ -168,6 +179,21 @@ function getCookie(name) {
    }
    return cookieValue;
  }
+var myInterval; 
+var a = 0;
+function cont(){
+  myInterval = setInterval(function(){ 
+    console.log('dntroooo',$('#counter').text())
+             
+             $('#counter').text(Math.ceil(a++));
+  },1000);
 
+}
+function stopCount(){
+clearInterval(myInterval);
+
+}
+                               
 </script>
+
 {% endblock %}

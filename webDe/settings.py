@@ -19,7 +19,7 @@ try:
     ALLOWED_HOSTS = ['*']
 except:
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = ['*']
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = KEY
+SECRET_KEY =')z(66-zt@g3y_=mh(n(xs8!es%yi0f7aczob9m&m)xikyrx#*6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.accounts',
     'apps.entradas',
-    'social_django',
+    #'social_django',
     'taggit',
 ]
 
@@ -142,13 +142,13 @@ MEDIA_URL ='/media/'
 #Social Media Login
 AUTHENTICATION_BACKENDS = (
 #    'social_core.backends.amazon.AmazonOAuth2',
-#    'social_core.backends.bitbucket.BitbucketOAuth',
-    'social_core.backends.facebook.FacebookAppOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
+#   # 'social_core.backends.bitbucket.BitbucketOAuth',
+   # 'social_core.backends.facebook.FacebookAppOAuth2',
+   # 'social_core.backends.facebook.FacebookOAuth2',
 #    'social_core.backends.github.GithubOAuth2',
 #    'social_core.backends.gitlab.GitLabOAuth2',
 #    'social_core.backends.google.GoogleOAuth',
-    'social_core.backends.google.GoogleOAuth2',
+   # 'social_core.backends.google.GoogleOAuth2',
 #    'social_core.backends.google.GoogleOpenId',
 #    'social_core.backends.google.GooglePlusAuth',
 #    'social_core.backends.google_openidconnect.GoogleOpenIdConnect',
@@ -165,16 +165,16 @@ AUTHENTICATION_BACKENDS = (
 )
 
 #Para esto hay que tenerlo con https la redireccion
-SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_KEY
-SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
+#SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_KEY
+#SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
 #para traer el email
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id,name,email',
-}
+#SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+#SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+#    'fields': 'id,name,email',
+#}
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE_KEY
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_SECRET
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE_KEY
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_SECRET
 #SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
 
@@ -202,8 +202,8 @@ LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = reverse_lazy('entradas:index')
 
 #SSL
-SECURE_SSL_REDIRECT = True
-CSRF_COOKIE_SECURE = True
+#SECURE_SSL_REDIRECT = True
+#CSRF_COOKIE_SECURE = True
 
 #config file
 FILE_UPLOAD_PERMISSIONS = 0o644
