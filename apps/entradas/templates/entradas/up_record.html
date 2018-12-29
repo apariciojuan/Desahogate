@@ -48,22 +48,20 @@
               <input type="hidden" class="form-control" id="tags" name="secret" placeholder="Que dices?" required>
            </div>
          </form>
-           <button type="submit" class="btn btn-primary"  style="width:100%;" id="sendit" onclick="send();">Save it!</button>
-    </div>
-    <div>
+        
+     <div class="container-fluid">
      	<h2>Record</h2>
- 
-      
      		<p>
-       
-     			<button id="record">Start     <p id="counter">0</p>  </button>
+     			<button id="record">Start <span id="counter">0</span></button>
      			<button id="stopRecord" disabled>Stop</button>
-      
-      	 </p>
+        </p>
    		<p>
     			<audio id="recordedAudio"></audio>
    		</p>
      </div>
+        <button type="submit" class="btn btn-primary"  style="width:100%;" id="sendit" onclick="send();">Save it!</button>
+    </div>
+
    </div>
   </div>
 
@@ -183,8 +181,7 @@ var myInterval;
 var a = 0;
 function cont(){
   myInterval = setInterval(function(){ 
-    console.log('dntroooo',$('#counter').text())
-             
+           
              $('#counter').text(Math.ceil(a++));
   },1000);
 
